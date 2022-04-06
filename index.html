@@ -5,24 +5,59 @@
     <meta charset="utf-8">
     <title>PoC calamine => wasm</title>
 </head>
+<style>
+    th,
+    td {
+        border: 1px solid;
+    }
+</style>
 
 <body>
     <h1>PoC calamine => wasm</h1>
-    <input type="file" id="file" multiple="multiple" onchange="upload()">
-    <div id="result">
+    <input type="file" id="file" multiple="multiple" onchange="output()">
+    <div id="analysis"></div>
+    <button onclick="renderTable()" id="render" hidden>Click to render the table</button>
+    <table id="result_table"></table>
 </body>
 <script>
-    async function upload() {
-        var file = document.getElementById('file').files[0];
-        let res = await excel_to_str(file);
-        document.getElementById('result').innerHTML = res;
+    async function parseExcelToJson(file) {
+        const start = performance.now();
+        const resultJson = await excel_to_json(file);
+        const end = performance.now();
+        document.getElementById('analysis').innerHTML = `Parsing time: ${end - start} ms.`
+        return resultJson;
+    }
+
+    function renderTable() {
+        const resultObject = window.resultObject;
+        const tbl = document.getElementById('result_table');
+        tbl.innerHTML = ''; // Clean up existing children
+        for (const row of resultObject) {
+            const rowEl = document.createElement('tr');
+            for (const cell of row) {
+                const cellEl = document.createElement('td');
+                cellEl.innerHTML = cell;
+                rowEl.appendChild(cellEl);
+            }
+            tbl.appendChild(rowEl);
+        }
+    }
+
+    async function output() {
+        const file = document.getElementById('file').files[0];
+        const resultJson = await parseExcelToJson(file);
+        const resultObject = JSON.parse(resultJson);
+        console.log(resultJson);
+        console.log(resultObject);
+        window.resultObject = resultObject;
+        document.getElementById('render').removeAttribute('hidden');
     }
 </script>
 <script type="module">
-    import init, { excel_to_str } from "./pkg/poc_calamine_wasm.js";
+    import init, { excel_to_json } from "./pkg/poc_calamine_wasm.js";
     init()
         .then(() => {
-            window.excel_to_str = excel_to_str;
+            window.excel_to_json = excel_to_json;
         });
 </script>
 
