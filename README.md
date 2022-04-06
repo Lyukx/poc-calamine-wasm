@@ -1,8 +1,8 @@
-This project is a PoC of using [calamine|https://docs.rs/calamine/latest/calamine/] crate to parse excel files in wasm.
+This project is a PoC of using [calamine](https://docs.rs/calamine/latest/calamine/) crate to parse excel files in wasm.
 
 Calamine currently relies much on `std::io::fs`, which is not supported when compiling to wasm.
 
-I uses an [unmerged PR of calamine|https://github.com/tafia/calamine/pull/256] to do this PoC, and I would switch to official calamine library if this PR is merged.
+I uses an [unmerged PR of calamine](https://github.com/tafia/calamine/pull/256) to do this PoC (Appreciate the work of Hanif Ariffin!), and I would switch to official calamine library if this PR is merged.
 
 Before that the wasm have to be compiled with a feature branch, please follow the below to build, or use `wasm` file directly.
 
