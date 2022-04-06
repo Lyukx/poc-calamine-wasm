@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>PoC calamine => wasm</title>
+</head>
+
+<body>
+    <h1>PoC calamine => wasm</h1>
+    <input type="file" id="file" multiple="multiple" onchange="upload()">
+    <div id="result">
+</body>
+<script>
+    async function upload() {
+        var file = document.getElementById('file').files[0];
+        let res = await excel_to_str(file);
+        document.getElementById('result').innerHTML = res;
+    }
+</script>
+<script type="module">
+    import init, { excel_to_str } from "./pkg/poc_calamine_wasm.js";
+    init()
+        .then(() => {
+            window.excel_to_str = excel_to_str;
+        });
+</script>
+
+</html>

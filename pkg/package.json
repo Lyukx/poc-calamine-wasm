@@ -1,0 +1,12 @@
+{
+  "name": "poc-calamine-wasm",
+  "version": "0.1.0",
+  "files": [
+    "poc_calamine_wasm_bg.wasm",
+    "poc_calamine_wasm.js",
+    "poc_calamine_wasm.d.ts"
+  ],
+  "module": "poc_calamine_wasm.js",
+  "types": "poc_calamine_wasm.d.ts",
+  "sideEffects": false
+}
