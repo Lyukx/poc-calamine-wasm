@@ -6,18 +6,31 @@ I uses an [unmerged PR of calamine|https://github.com/tafia/calamine/pull/256] t
 
 Before that the wasm have to be compiled with a feature branch, please follow the below to build, or use `wasm` file directly.
 
-## Build
+# Play with it
+```bash
+# Launch a server with whatever tool you like in the root path, then open index.html in your browser
+npx http-server ./
+```
+### What does it do?
+Read an excel file and parse it to a string, split rows by `;` and cells in a row by `,`.
+For example:
+### Excel File
+|   A    |   B    |
+|  ----  |  ----  |
+| Cell_1 | Cell_2 |
+| Cell_3 | Cell_4 |
+| Cell_5 |        |
 
+### Output result:
+```
+Cell_1,Cell_2;Cell_3,Cell_4;Cell_5,;
+```
+
+# Build
 ```bash
 # Checkout Hanif Ariffin's feature branch
 git clone git@github.com:hbina/calamine.git
 cd calamine && git checkout hbina-add-ability-to-open-workbook-from-byes && cd ..
 # Build wasm
 wasm-pack build --target web
-```
-
-## Play with it
-```bash
-# Launch a server with whatever tool you like in the root path, then open index.html in your browser
-npx http-server ./
 ```

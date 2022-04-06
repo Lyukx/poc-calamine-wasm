@@ -4,13 +4,13 @@
 * @param {File} file
 * @returns {Promise<string>}
 */
-export function excel_to_str(file: File): Promise<string>;
+export function excel_to_json(file: File): Promise<string>;
 
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
 
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
-  readonly excel_to_str: (a: number) => number;
+  readonly excel_to_json: (a: number) => number;
   readonly __wbindgen_malloc: (a: number) => number;
   readonly __wbindgen_realloc: (a: number, b: number, c: number) => number;
   readonly __wbindgen_export_2: WebAssembly.Table;

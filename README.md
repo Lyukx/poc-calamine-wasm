@@ -12,7 +12,7 @@ Before that the wasm have to be compiled with a feature branch, please follow th
 npx http-server ./
 ```
 ### What does it do?
-Read an excel file and parse it to a string, split rows by `;` and cells in a row by `,`.
+Read an excel file and parse it to json string. The json object is a 2d array of strings, empty cells are translated to empty strings.
 For example:
 ### Excel File
 |   A    |   B    |
@@ -22,8 +22,8 @@ For example:
 | Cell_5 |        |
 
 ### Output result:
-```
-Cell_1,Cell_2;Cell_3,Cell_4;Cell_5,;
+```json
+[["Cell_1","Cell_2"],["Cell_3","Cell_4"],["Cell_5",""]]
 ```
 
 # Build
